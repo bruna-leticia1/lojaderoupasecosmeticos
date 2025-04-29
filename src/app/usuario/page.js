@@ -1,6 +1,19 @@
-export default ()=> (
-    <>
-    <h1>Página do aluno</h1>
-    <p>O aluno fulano de tal...</p>
-    </>
-)
+import db from "@/lib/db"
+export default async () => {
+    const alunos = await db.query("select * from aluno")
+ return (<>
+    <h1>Lista de alunos</h1>
+    <h2>sei la</h2>
+    <div>
+      {
+         alunos.rows.map( 
+            a => (
+               <div>
+                  {a.name} faz parte do projeto {a.project}
+               </div>
+            ) 
+         )
+      }
+   </div>
+ </>);
+}
